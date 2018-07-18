@@ -1,0 +1,244 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>英卡电子</title>
+    <meta name="author" content="Cqingwo- Liu"/>
+    <meta name="copyright" content="Copyright (c) 2011 Cqingwo All Rights Reserved."/>
+    <!-- struts -->
+    <link href="/static/admin/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/miluo.css"/>
+    <!-- 调用远程jquery -->
+    <script src="https://cdn.cqwo.com/js/jquery.min.js" type="text/javascript"></script>
+    <!-- 调用Bootstrap-->
+    <script src="https://cdn.cqwo.com/js/bootstrap.min.js" type="text/javascript"></script>
+    <!--公共JS方法-->
+    <script src="https://cdn.cqwo.com/js/commom.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/static/admin/scripts/showlist.js"></script>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.cqwo.com/js/html5shiv.min.js"></script>
+    <script src="https://cdn.cqwo.com/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<body>
+
+<div id="wrapper">
+    <div id="main">
+        <div class="main">
+            <div class="title">
+                <div class="position">
+                    <img src="/static/admin/images/position.png" alt=""/>
+                    <a href="#">财务管理</a>
+                    <img src="/static/admin/images/right.png" alt=""/>
+                    <span>财务列表</span>
+                </div>
+                <div th:replace="~{admin/shared/common_message :: hope}"></div>
+            </div>
+            <form action="list.html" method="post">
+                <div id="contenr">
+                    <div class="contenr">
+                        <div class="dataListSearch hurf">
+                            <table height="32">
+                                <tbody>
+                                <tr>
+                                    <td style="font-size: 12px;">用户UID：</td>
+                                    <td width="170"><input class="form-control" data-val="true"
+                                                           data-val-number="字段 Uid 必须是一个数字。"
+                                                           data-val-required="Uid 字段是必需的。"
+                                                           id="Uid" name="Uid" placeholder="用户UID"
+                                                           style="font-size: 10px; height:28px;" type="text" value="0"/>
+                                    </td>
+                                    <td width="35">&nbsp;</td>
+                                    <td style="font-size: 12px;">用户名：</td>
+                                    <td width="170"><input class="form-control" id="UserName" name="UserName"
+                                                           placeholder="用户名" style="font-size: 10px; height:28px;"
+                                                           type="text" value=""/></td>
+                                    <td width="35">&nbsp;</td>
+                                    <td style="font-size: 12px;">真实姓名：</td>
+                                    <td width="170"><input class="form-control" id="RealName" name="RealName"
+                                                           placeholder="真实姓名" style="font-size: 10px; height:28px;"
+                                                           type="text" value=""/></td>
+                                    <td width="35">&nbsp;</td>
+                                    <td style="font-size: 12px;">手机：</td>
+                                    <td width="170"><input class="form-control" id="Mobile" name="Mobile"
+                                                           placeholder="手机"
+                                                           style="font-size: 10px; height:28px;" type="text" value=""/>
+                                    </td>
+                                    <td width="35">&nbsp;</td>
+                                    <td>
+                                        <button class="searchBut submit" style="height: 28px; width: 70px; border: none"
+                                                type="submit" value="搜索">搜索
+                                        </button>
+                                    </td>
+                                    <!--<a class="btn btn-default right" href="add.html"-->
+                                    <!--style="font-size: 10px; height:28px;">添加用户</a>-->
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="clear clearfix"></div>
+                        <table width="98%" class="table table-striped table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th width="10" align="center"></th>
+                                <th width="40" align="center"><input type="checkbox" id="allSelect"/></th>
+                                <th width="60" align="center">编号</th>
+                                <th width="100" align="left">操作类型</th>
+                                <th width="80" align="left">账户名</th>
+                                <th width="100" align="left">操作金额</th>
+                                <th width="100" align="left">手续费</th>
+                                <th width="100" align="left">实际金额</th>
+                                <th width="180" align="left">时间</th>
+                                <th align="left">状态</th>
+                                <th width="234" align="left">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                            <tr th:each="info : ${Model.bankRollInfoList}">
+                                <td align="center"></td>
+                                <td align="center">
+                                    <input type="checkbox"/>
+                                </td>
+                                <td align="center" th:text="${info.id}">34</td>
+                                <td>
+
+
+                                    <th:block th:if="${info.bankAction == -3}">消费</th:block>
+                                    <th:block th:if="${info.bankAction == -2}">扣款</th:block>
+                                    <th:block th:if="${info.bankAction == -1}">提现</th:block>
+                                    <th:block th:if="${info.bankAction == 1}">消费收入</th:block>
+                                    <th:block th:if="${info.bankAction == 2}">充值</th:block>
+                                    <th:block th:if="${info.bankAction == 3}">奖励</th:block>
+                                    <th:block th:if="${info.bankAction == 4}">推荐奖励</th:block>
+
+                                </td>
+                                <td th:text="${info.uid}">-1</td>
+                                <td>¥10.0</td>
+                                <td>¥0.0</td>
+                                <td><span style="color: red; font-size: 22px" th:text="'¥'+${info.money}">¥10.0</span>
+                                </td>
+                                <td>
+                                    申请时间:
+                                    <span th:text="${DateHelper.timeformat(info.addTime)}"></span>
+                                    <br/>
+                                    更新时间:
+                                    <span th:text="${DateHelper.timeformat(info.updateTime)}"></span>
+                                    <br/>
+                                </td>
+                                <td>
+
+                            <span style="color: red">
+                                <th:block th:if="${info.state == 10}">已提交,审核中</th:block>
+                                <th:block th:if="${info.state == 20}">审核完成</th:block>
+                                <th:block th:if="${info.state == 30}">已完成</th:block>
+                                <th:block th:if="${info.state == 160}">失败</th:block>
+                                <th:block th:if="${info.state == 180}">冻结</th:block>
+                                <th:block th:if="${info.state == 200}">取消</th:block>
+                            </span>
+                                    <a href="javascript:void(0);" onclick="showMessage('')">[详情]</a>
+
+
+                                </td>
+
+                                <td th:id="'operation'+${info.id}">
+
+                                    <!--<a class="editOperate" href="waitconfirm.html?id=5" th:if="${info.state == 0}"-->
+                                    <!--th:href="@{examine(id=${info.id})}">[财务审核]</a>-->
+
+                                    <a class="editOperate" href="completed.html?id=5" th:if="${info.state == 10 && info.bankAction == -1}"
+                                       th:href="@{cash/confirm(id=${info.id})}">[财务审核]</a>
+
+
+                                    <a class="editOperate"
+                                       th:if="${info.state == 20 && info.bankAction == -1}" href="completed.html?id=5"
+                                       th:href="@{cash/completed(id=${info.id})}">[提现完成]</a>
+
+
+                                    <a class="editOperate" href="sendreward.html?id=5" th:if="${info.state == 20 && info.bankAction == 3}"
+                                       th:href="@{sendreward(id=${info.id})}">[奖励发放]</a>
+
+
+                                    <th:block th:if="${info.state == 30}">
+                                        已完成
+                                    </th:block>
+
+                                    <a class="editOperate" href="" th:href="@{returned(id=${info.id})}"
+                                       th:if="${info.state != 160 && info.state < 30 && info.bankAction == -1}">[失败]</a>
+
+
+                                    <a class="editOperate" href="javascript:void(0)" th:href="@{locked(id=${info.id})}"
+                                       th:if="${info.state != 180 && info.state < 30}">[冻结]</a>
+
+
+                                    <a class="editOperate" href="javascript:void(0)"
+                                       th:href="@{cancelled(id=${info.id})}"
+                                       th:if="${((info.state != 200 && info.state < 30) ||  info.state == 180 )&& info.bankAction == -1}">[取消]</a>
+
+                                    <!--<c:if test="${(info.state != 200 && info.state<30) || info.state == 200}">-->
+                                    <!--<a class="editOperate" href="javascript:void(0)"-->
+                                    <!--onclick="ajaxCancelledBankRoll(${info.id})">[冻结]</a>-->
+                                    <!--</c:if>-->
+
+                                    <!--<c:choose>-->
+                                    <!--<c:when test="${info.state < 10}">-->
+                                    <!--</c:when>-->
+                                    <!--<c:when test="${info.state < 30}">-->
+                                    <!--<a class="editOperate" href="completed.html?id=${info.id}">[完成转账]</a>-->
+                                    <!--</c:when>-->
+                                    <!--<c:when test="${info.state < 30}">-->
+                                    <!--<a class="editOperate" href="completed.html?id=${info.id}">[完成]</a>-->
+                                    <!--</c:when>-->
+                                    <!--<c:when test="${info.state == 30}">-->
+                                    <!--已完成-->
+                                    <!--</c:when>-->
+
+                                    <!--</c:choose>-->
+
+
+                                    <!--<c:if test="${info.state != 160 && info.state<30}">-->
+                                    <!--<a class="editOperate" href="javascript:void(0)"-->
+                                    <!--onclick="ajaxReturnedBankRoll(${info.id})">[失败]</a>-->
+                                    <!--</c:if>-->
+
+                                    <!--<c:if test="${info.state != 180 && info.state<30}">-->
+                                    <!--<a class="editOperate" href="javascript:void(0)"-->
+                                    <!--onclick="ajaxLockedBankRoll(${info.id})">[冻结]</a>-->
+                                    <!--</c:if>-->
+
+
+                                    <!--<c:if test="${(info.state != 200 && info.state<30) || info.state == 200}">-->
+                                    <!--<a class="editOperate" href="javascript:void(0)"-->
+                                    <!--onclick="ajaxCancelledBankRoll(${info.id})">[冻结]</a>-->
+                                    <!--</c:if>-->
+
+
+                                </td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                        <div class="clear clearfix"></div>
+                        <div class="number">
+                            <ul id="dataPageList" class="pagination" th:utext="${Model.pageModel.toString()}">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

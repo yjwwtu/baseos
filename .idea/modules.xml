@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Libraries/Core/Core.iml" filepath="$PROJECT_DIR$/Libraries/Core/Core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Libraries/Data/Data.iml" filepath="$PROJECT_DIR$/Libraries/Data/Data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Plugins/OAuth.MiniApp/OAuth.MiniApp.iml" filepath="$PROJECT_DIR$/Plugins/OAuth.MiniApp/OAuth.MiniApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Plugins/Pay.Wechat/Pay.Wechat.iml" filepath="$PROJECT_DIR$/Plugins/Pay.Wechat/Pay.Wechat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Libraries/Services/Services.iml" filepath="$PROJECT_DIR$/Libraries/Services/Services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SoftGateWay.iml" filepath="$PROJECT_DIR$/SoftGateWay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Strategies/Strategy.Bank/Strategy.Bank.iml" filepath="$PROJECT_DIR$/Strategies/Strategy.Bank/Strategy.Bank.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Strategies/Strategy.Config/Strategy.Config.iml" filepath="$PROJECT_DIR$/Strategies/Strategy.Config/Strategy.Config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Strategies/Strategy.Email/Strategy.Email.iml" filepath="$PROJECT_DIR$/Strategies/Strategy.Email/Strategy.Email.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Strategies/Strategy.Event/Strategy.Event.iml" filepath="$PROJECT_DIR$/Strategies/Strategy.Event/Strategy.Event.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Strategies/Strategy.Log/Strategy.Log.iml" filepath="$PROJECT_DIR$/Strategies/Strategy.Log/Strategy.Log.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Strategies/Strategy.Push/Strategy.Push.iml" filepath="$PROJECT_DIR$/Strategies/Strategy.Push/Strategy.Push.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Strategies/Strategy.RDBS/Strategy.RDBS.iml" filepath="$PROJECT_DIR$/Strategies/Strategy.RDBS/Strategy.RDBS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Strategies/Strategy.Redis/Strategy.Redis.iml" filepath="$PROJECT_DIR$/Strategies/Strategy.Redis/Strategy.Redis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Strategies/Strategy.SMS/Strategy.SMS.iml" filepath="$PROJECT_DIR$/Strategies/Strategy.SMS/Strategy.SMS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Strategies/Strategy.Upload/Strategy.Upload.iml" filepath="$PROJECT_DIR$/Strategies/Strategy.Upload/Strategy.Upload.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Presentation/Web/Web.iml" filepath="$PROJECT_DIR$/Presentation/Web/Web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Presentation/Web.Admin/Web.Admin.iml" filepath="$PROJECT_DIR$/Presentation/Web.Admin/Web.Admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Presentation/Web.Api/Web.Api.iml" filepath="$PROJECT_DIR$/Presentation/Web.Api/Web.Api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Presentation/Web.Framework/Web.Framework.iml" filepath="$PROJECT_DIR$/Presentation/Web.Framework/Web.Framework.iml" />
+    </modules>
+  </component>
+</project>

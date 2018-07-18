@@ -1,0 +1,535 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>英卡电子</title>
+    <meta name="author" content="Cqingwo-Liu"/>
+    <meta name="copyright" content="Copyright (c) 2011 Cqingwo All Rights Reserved."/>
+    <!-- struts -->
+    <link href="/static/admin/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/miluo.css"/>
+    <!-- 调用远程jquery -->
+    <script src="https://cdn.cqwo.com/js/jquery.min.js" type="text/javascript"></script>
+    <!-- 调用Bootstrap-->
+    <script src="https://cdn.cqwo.com/js/bootstrap.min.js" type="text/javascript"></script>
+    <!--公共JS方法-->
+    <script src="https://cdn.cqwo.com/js/commom.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/static/admin/scripts/showlist.js"></script>
+
+
+    <script src="/components/jbox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
+    <link href="/components/jbox/Skins/Default/jbox.css" rel="stylesheet"></link>
+
+    <!--[if lt IE 9]>
+    <script src="https://cdn.cqwo.com/js/html5shiv.min.js"></script>
+    <script src="https://cdn.cqwo.com/js/respond.min.js"></script>
+    <![endif]-->
+
+
+    <script type="text/javascript">
+
+        var forumId = 0;
+        var forumTitle = "111";
+
+
+        function openForumRewardSelectLayer(fid, ftitle) {
+
+            forumId = fid;
+
+            forumTitle = ftitle;
+
+
+            $.jBox("html:forumSelectLayer", {
+                id: 'forumSelectLayer',
+                width: 500,
+                height: 320,
+                buttons: {"关闭": true},
+                title: "微信打赏"
+            });
+
+            $.jBox.setContent(forumSelectLayerHtml);
+            //ajaxProductSelectList();
+
+        }
+    </script>
+</head>
+<body>
+
+
+<div id="wrapper">
+    <div class="title">
+        <div class="position">
+            <img src="/static/admin/images/position.png" alt=""/>
+            <a href="#">论坛管理</a>
+            <img src="/static/admin/images/right.png" alt=""/>
+            <span>论坛列表</span>
+        </div>
+
+    </div>
+
+<!--<th:block th:utext="${Model.toString()}"></th:block>-->
+
+    <form action="list" method="post">
+
+        <div id="contenr">
+            <div class="contenr">
+
+                <div class="hurf">
+                    <div class="input-group col-md-1">
+                        <select class="btn btn-default" style="width: 80%">
+                            <option>分类</option>
+                        </select></div>
+                    <div class="input-group col-md-3">
+
+                        <input type="text" name="keywords" th:value="${Model.keywords}" class="form-control" placeholder="搜索">
+                        <span class="input-group-btn">
+                            <button class="btn btn-info btn-search"><i class="icon iconfont"></i></button>
+                            </span>
+                    </div>
+                </div>
+
+                <div class="clear clearfix"></div>
+                <table width="98%" class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th width="10" align="center"></th>
+                        <th width="40" align="center">
+                            <input type="checkbox" id="allSelect"/></th>
+                        <th width="30" align="left">编号</th>
+                        <th align="left">主题</th>
+                        <th width="80" align="left">发布人</th>
+                        <th width="50" align="left">访问量</th>
+                        <th width="50" align="left">点赞次数</th>
+
+                        <th width="280"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+
+                    <tr th:each="info: ${Model.forumInfoList}">
+                        <td align="center"></td>
+                        <td>
+                            <input type="checkbox"/></td>
+                        <td th:text="${info.forumId}">416</td>
+                        <td>
+
+                            <img src="http://www.zxrenjia.com/upload/forum/2018-6/ura_180606213855cxlweg.jpg" th:src="${info.litpic+'?imageMogr2/thumbnail/!20p'}" width="50" height="50"
+                                 style="margin: 10px; border-radius: 3px; border: 2px solid darkred ;float: left"/>
+
+                            <p style="word-wrap:break-word;overflow: hidden;" th:text="${info.title}">体彩店转让</p>
+                        </td>
+                        <td th:text="${info.nickName}"></td>
+                        <td th:text="${info.click}">0</td>
+                        <td th:text="${info.praiseCount}">0</td>
+                        <td>
+                            <!--<a class="btn btn-default right" href="publishlist?forumId=416"
+                               th:href ="@{attach/list(forumId=${info.forumId})}"
+                               style="font-size: 10px; height:28px;">附件</a>-->
+                            <!--<a class="btn btn-default right" href="sendreward.html?forumId=416"-->
+                               <!--style="font-size: 10px; height:28px;">打赏</a>-->
+                            <a class="btn btn-default right" href="delete?forumId=416"
+                               th:href ="@{attach/list(forumId=${info.forumId})}"
+                               style="font-size: 10px; height:28px;" onclick="return confirm('确认删除？')">删除</a>
+                            <a class="btn btn-default right" href="detail.html?forumId=416"
+                               th:href ="@{detail(forumId=${info.forumId})}"
+                               style="font-size: 10px; height:28px;">详情</a>
+                        </td>
+                    </tr>
+
+
+                    <!--<tr>-->
+                        <!--<td align="center"></td>-->
+                        <!--<td>-->
+                            <!--<input type="checkbox"/></td>-->
+                        <!--<td>415</td>-->
+                        <!--<td>-->
+
+                            <!--<img src="http://www.zxrenjia.com/upload/forum/2018-6/ura_180605105219phollv.jpg" width="50" height="50"-->
+                                 <!--style="margin: 10px; border-radius: 3px; border: 2px solid darkred ;float: left"/>-->
+
+                            <!--<p style="word-wrap:break-word;overflow: hidden;">美食推荐</p>-->
+                        <!--</td>-->
+                        <!--<td>牛鼎记@老鄧</td>-->
+                        <!--<td>2</td>-->
+                        <!--<td>1</td>-->
+                        <!--<td>-->
+                            <!--<a class="btn btn-default right" href="publishlist.html?forumId=415"-->
+                               <!--style="font-size: 10px; height:28px;">配图</a>-->
+                            <!--<a class="btn btn-default right" href="sendreward.html?forumId=415"-->
+                               <!--style="font-size: 10px; height:28px;">打赏</a>-->
+                            <!--<a class="btn btn-default right" href="delete.html?forumId=415"-->
+                               <!--style="font-size: 10px; height:28px;" onclick="return confirm('确认删除？')">删除</a>-->
+                            <!--<a class="btn btn-default right" href="edit.html?forumId=415"-->
+                               <!--style="font-size: 10px; height:28px;">编辑</a>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+
+                    <!--<tr>-->
+                        <!--<td align="center"></td>-->
+                        <!--<td>-->
+                            <!--<input type="checkbox"/></td>-->
+                        <!--<td>414</td>-->
+                        <!--<td>-->
+
+                            <!--<p style="word-wrap:break-word;overflow: hidden;"> 体彩店转让</p>-->
+                        <!--</td>-->
+                        <!--<td></td>-->
+                        <!--<td>7</td>-->
+                        <!--<td>1</td>-->
+                        <!--<td>-->
+                            <!--<a class="btn btn-default right" href="publishlist.html?forumId=414"-->
+                               <!--style="font-size: 10px; height:28px;">配图</a>-->
+                            <!--<a class="btn btn-default right" href="sendreward.html?forumId=414"-->
+                               <!--style="font-size: 10px; height:28px;">打赏</a>-->
+                            <!--<a class="btn btn-default right" href="delete.html?forumId=414"-->
+                               <!--style="font-size: 10px; height:28px;" onclick="return confirm('确认删除？')">删除</a>-->
+                            <!--<a class="btn btn-default right" href="edit.html?forumId=414"-->
+                               <!--style="font-size: 10px; height:28px;">编辑</a>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+
+                    <!--<tr>-->
+                        <!--<td align="center"></td>-->
+                        <!--<td>-->
+                            <!--<input type="checkbox"/></td>-->
+                        <!--<td>413</td>-->
+                        <!--<td>-->
+
+                            <!--<img src="http://www.zxrenjia.com/upload/forum/2018-5/ura_180527105644khspus.jpg" width="50" height="50"-->
+                                 <!--style="margin: 10px; border-radius: 3px; border: 2px solid darkred ;float: left"/>-->
+
+                            <!--<p style="word-wrap:break-word;overflow: hidden;">招聘</p>-->
+                        <!--</td>-->
+                        <!--<td>【亚洲迈克泰森】中国的安东尼罗宾</td>-->
+                        <!--<td>6</td>-->
+                        <!--<td>0</td>-->
+                        <!--<td>-->
+                            <!--<a class="btn btn-default right" href="publishlist.html?forumId=413"-->
+                               <!--style="font-size: 10px; height:28px;">配图</a>-->
+                            <!--<a class="btn btn-default right" href="sendreward.html?forumId=413"-->
+                               <!--style="font-size: 10px; height:28px;">打赏</a>-->
+                            <!--<a class="btn btn-default right" href="delete.html?forumId=413"-->
+                               <!--style="font-size: 10px; height:28px;" onclick="return confirm('确认删除？')">删除</a>-->
+                            <!--<a class="btn btn-default right" href="edit.html?forumId=413"-->
+                               <!--style="font-size: 10px; height:28px;">编辑</a>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+
+                    <!--<tr>-->
+                        <!--<td align="center"></td>-->
+                        <!--<td>-->
+                            <!--<input type="checkbox"/></td>-->
+                        <!--<td>412</td>-->
+                        <!--<td>-->
+
+                            <!--<img src="http://www.zxrenjia.com/upload/forum/2018-5/ura_180523154553wbwpbt.jpg" width="50" height="50"-->
+                                 <!--style="margin: 10px; border-radius: 3px; border: 2px solid darkred ;float: left"/>-->
+
+                            <!--<p style="word-wrap:break-word;overflow: hidden;">vghuuhuh</p>-->
+                        <!--</td>-->
+                        <!--<td></td>-->
+                        <!--<td>4</td>-->
+                        <!--<td>0</td>-->
+                        <!--<td>-->
+                            <!--<a class="btn btn-default right" href="publishlist.html?forumId=412"-->
+                               <!--style="font-size: 10px; height:28px;">配图</a>-->
+                            <!--<a class="btn btn-default right" href="sendreward.html?forumId=412"-->
+                               <!--style="font-size: 10px; height:28px;">打赏</a>-->
+                            <!--<a class="btn btn-default right" href="delete.html?forumId=412"-->
+                               <!--style="font-size: 10px; height:28px;" onclick="return confirm('确认删除？')">删除</a>-->
+                            <!--<a class="btn btn-default right" href="edit.html?forumId=412"-->
+                               <!--style="font-size: 10px; height:28px;">编辑</a>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+
+                    <!--<tr>-->
+                        <!--<td align="center"></td>-->
+                        <!--<td>-->
+                            <!--<input type="checkbox"/></td>-->
+                        <!--<td>411</td>-->
+                        <!--<td>-->
+
+                            <!--<p style="word-wrap:break-word;overflow: hidden;">招聘</p>-->
+                        <!--</td>-->
+                        <!--<td>【亚洲迈克泰森】中国的安东尼罗宾</td>-->
+                        <!--<td>2</td>-->
+                        <!--<td>0</td>-->
+                        <!--<td>-->
+                            <!--<a class="btn btn-default right" href="publishlist.html?forumId=411"-->
+                               <!--style="font-size: 10px; height:28px;">配图</a>-->
+                            <!--<a class="btn btn-default right" href="sendreward.html?forumId=411"-->
+                               <!--style="font-size: 10px; height:28px;">打赏</a>-->
+                            <!--<a class="btn btn-default right" href="delete.html?forumId=411"-->
+                               <!--style="font-size: 10px; height:28px;" onclick="return confirm('确认删除？')">删除</a>-->
+                            <!--<a class="btn btn-default right" href="edit.html?forumId=411"-->
+                               <!--style="font-size: 10px; height:28px;">编辑</a>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+
+                    <!--<tr>-->
+                        <!--<td align="center"></td>-->
+                        <!--<td>-->
+                            <!--<input type="checkbox"/></td>-->
+                        <!--<td>410</td>-->
+                        <!--<td>-->
+
+                            <!--<img src="http://www.zxrenjia.com/upload/forum/2018-5/ura_180522180430qjazpc.jpg" width="50" height="50"-->
+                                 <!--style="margin: 10px; border-radius: 3px; border: 2px solid darkred ;float: left"/>-->
+
+                            <!--<p style="word-wrap:break-word;overflow: hidden;">招聘网</p>-->
+                        <!--</td>-->
+                        <!--<td>【亚洲迈克泰森】中国的安东尼罗宾</td>-->
+                        <!--<td>2</td>-->
+                        <!--<td>0</td>-->
+                        <!--<td>-->
+                            <!--<a class="btn btn-default right" href="publishlist.html?forumId=410"-->
+                               <!--style="font-size: 10px; height:28px;">配图</a>-->
+                            <!--<a class="btn btn-default right" href="sendreward.html?forumId=410"-->
+                               <!--style="font-size: 10px; height:28px;">打赏</a>-->
+                            <!--<a class="btn btn-default right" href="delete.html?forumId=410"-->
+                               <!--style="font-size: 10px; height:28px;" onclick="return confirm('确认删除？')">删除</a>-->
+                            <!--<a class="btn btn-default right" href="edit.html?forumId=410"-->
+                               <!--style="font-size: 10px; height:28px;">编辑</a>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+
+                    <!--<tr>-->
+                        <!--<td align="center"></td>-->
+                        <!--<td>-->
+                            <!--<input type="checkbox"/></td>-->
+                        <!--<td>409</td>-->
+                        <!--<td>-->
+
+                            <!--<p style="word-wrap:break-word;overflow: hidden;">忠洲招聘</p>-->
+                        <!--</td>-->
+                        <!--<td>【亚洲迈克泰森】中国的安东尼罗宾</td>-->
+                        <!--<td>1</td>-->
+                        <!--<td>0</td>-->
+                        <!--<td>-->
+                            <!--<a class="btn btn-default right" href="publishlist.html?forumId=409"-->
+                               <!--style="font-size: 10px; height:28px;">配图</a>-->
+                            <!--<a class="btn btn-default right" href="sendreward.html?forumId=409"-->
+                               <!--style="font-size: 10px; height:28px;">打赏</a>-->
+                            <!--<a class="btn btn-default right" href="delete.html?forumId=409"-->
+                               <!--style="font-size: 10px; height:28px;" onclick="return confirm('确认删除？')">删除</a>-->
+                            <!--<a class="btn btn-default right" href="edit.html?forumId=409"-->
+                               <!--style="font-size: 10px; height:28px;">编辑</a>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+
+                    <!--<tr>-->
+                        <!--<td align="center"></td>-->
+                        <!--<td>-->
+                            <!--<input type="checkbox"/></td>-->
+                        <!--<td>408</td>-->
+                        <!--<td>-->
+
+                            <!--<img src="http://www.zxrenjia.com/upload/forum/2018-5/ura_180522140448epvtqd.png" width="50" height="50"-->
+                                 <!--style="margin: 10px; border-radius: 3px; border: 2px solid darkred ;float: left"/>-->
+
+                            <!--<p style="word-wrap:break-word;overflow: hidden;">招聘</p>-->
+                        <!--</td>-->
+                        <!--<td>【亚洲迈克泰森】中国的安东尼罗宾</td>-->
+                        <!--<td>12</td>-->
+                        <!--<td>0</td>-->
+                        <!--<td>-->
+                            <!--<a class="btn btn-default right" href="publishlist.html?forumId=408"-->
+                               <!--style="font-size: 10px; height:28px;">配图</a>-->
+                            <!--<a class="btn btn-default right" href="sendreward.html?forumId=408"-->
+                               <!--style="font-size: 10px; height:28px;">打赏</a>-->
+                            <!--<a class="btn btn-default right" href="delete.html?forumId=408"-->
+                               <!--style="font-size: 10px; height:28px;" onclick="return confirm('确认删除？')">删除</a>-->
+                            <!--<a class="btn btn-default right" href="edit.html?forumId=408"-->
+                               <!--style="font-size: 10px; height:28px;">编辑</a>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+
+                    <!--<tr>-->
+                        <!--<td align="center"></td>-->
+                        <!--<td>-->
+                            <!--<input type="checkbox"/></td>-->
+                        <!--<td>407</td>-->
+                        <!--<td>-->
+
+                            <!--<p style="word-wrap:break-word;overflow: hidden;">招工</p>-->
+                        <!--</td>-->
+                        <!--<td>【亚洲迈克泰森】中国的安东尼罗宾</td>-->
+                        <!--<td>2</td>-->
+                        <!--<td>0</td>-->
+                        <!--<td>-->
+                            <!--<a class="btn btn-default right" href="publishlist.html?forumId=407"-->
+                               <!--style="font-size: 10px; height:28px;">配图</a>-->
+                            <!--<a class="btn btn-default right" href="sendreward.html?forumId=407"-->
+                               <!--style="font-size: 10px; height:28px;">打赏</a>-->
+                            <!--<a class="btn btn-default right" href="delete.html?forumId=407"-->
+                               <!--style="font-size: 10px; height:28px;" onclick="return confirm('确认删除？')">删除</a>-->
+                            <!--<a class="btn btn-default right" href="edit.html?forumId=407"-->
+                               <!--style="font-size: 10px; height:28px;">编辑</a>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+
+                    <!--<tr>-->
+                        <!--<td align="center"></td>-->
+                        <!--<td>-->
+                            <!--<input type="checkbox"/></td>-->
+                        <!--<td>406</td>-->
+                        <!--<td>-->
+
+                            <!--<p style="word-wrap:break-word;overflow: hidden;">重庆市厂区诚聘18723662110</p>-->
+                        <!--</td>-->
+                        <!--<td>【亚洲迈克泰森】中国的安东尼罗宾</td>-->
+                        <!--<td>6</td>-->
+                        <!--<td>1</td>-->
+                        <!--<td>-->
+                            <!--<a class="btn btn-default right" href="publishlist.html?forumId=406"-->
+                               <!--style="font-size: 10px; height:28px;">配图</a>-->
+                            <!--<a class="btn btn-default right" href="sendreward.html?forumId=406"-->
+                               <!--style="font-size: 10px; height:28px;">打赏</a>-->
+                            <!--<a class="btn btn-default right" href="delete.html?forumId=406"-->
+                               <!--style="font-size: 10px; height:28px;" onclick="return confirm('确认删除？')">删除</a>-->
+                            <!--<a class="btn btn-default right" href="edit.html?forumId=406"-->
+                               <!--style="font-size: 10px; height:28px;">编辑</a>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+
+                    <!--<tr>-->
+                        <!--<td align="center"></td>-->
+                        <!--<td>-->
+                            <!--<input type="checkbox"/></td>-->
+                        <!--<td>405</td>-->
+                        <!--<td>-->
+
+                            <!--<img src="http://www.zxrenjia.com/upload/forum/2018-5/ura_180521105925ntjykb.jpg" width="50" height="50"-->
+                                 <!--style="margin: 10px; border-radius: 3px; border: 2px solid darkred ;float: left"/>-->
+
+                            <!--<p style="word-wrap:break-word;overflow: hidden;">大量招聘兼职200一天热线18723662110</p>-->
+                        <!--</td>-->
+                        <!--<td>【亚洲迈克泰森】中国的安东尼罗宾</td>-->
+                        <!--<td>8</td>-->
+                        <!--<td>1</td>-->
+                        <!--<td>-->
+                            <!--<a class="btn btn-default right" href="publishlist.html?forumId=405"-->
+                               <!--style="font-size: 10px; height:28px;">配图</a>-->
+                            <!--<a class="btn btn-default right" href="sendreward.html?forumId=405"-->
+                               <!--style="font-size: 10px; height:28px;">打赏</a>-->
+                            <!--<a class="btn btn-default right" href="delete.html?forumId=405"-->
+                               <!--style="font-size: 10px; height:28px;" onclick="return confirm('确认删除？')">删除</a>-->
+                            <!--<a class="btn btn-default right" href="edit.html?forumId=405"-->
+                               <!--style="font-size: 10px; height:28px;">编辑</a>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+
+                    <!--<tr>-->
+                        <!--<td align="center"></td>-->
+                        <!--<td>-->
+                            <!--<input type="checkbox"/></td>-->
+                        <!--<td>404</td>-->
+                        <!--<td>-->
+
+                            <!--<p style="word-wrap:break-word;overflow: hidden;">暑假工大量招聘财富热线老谭18723662110</p>-->
+                        <!--</td>-->
+                        <!--<td>【亚洲迈克泰森】中国的安东尼罗宾</td>-->
+                        <!--<td>9</td>-->
+                        <!--<td>0</td>-->
+                        <!--<td>-->
+                            <!--<a class="btn btn-default right" href="publishlist.html?forumId=404"-->
+                               <!--style="font-size: 10px; height:28px;">配图</a>-->
+                            <!--<a class="btn btn-default right" href="sendreward.html?forumId=404"-->
+                               <!--style="font-size: 10px; height:28px;">打赏</a>-->
+                            <!--<a class="btn btn-default right" href="delete.html?forumId=404"-->
+                               <!--style="font-size: 10px; height:28px;" onclick="return confirm('确认删除？')">删除</a>-->
+                            <!--<a class="btn btn-default right" href="edit.html?forumId=404"-->
+                               <!--style="font-size: 10px; height:28px;">编辑</a>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+
+                    <!--<tr>-->
+                        <!--<td align="center"></td>-->
+                        <!--<td>-->
+                            <!--<input type="checkbox"/></td>-->
+                        <!--<td>403</td>-->
+                        <!--<td>-->
+
+                            <!--<img src="http://www.zxrenjia.com/upload/forum/2018-5/ura_180519193106yjrqjb.jpg" width="50" height="50"-->
+                                 <!--style="margin: 10px; border-radius: 3px; border: 2px solid darkred ;float: left"/>-->
+
+                            <!--<p style="word-wrap:break-word;overflow: hidden;">署假招工</p>-->
+                        <!--</td>-->
+                        <!--<td>【亚洲迈克泰森】中国的安东尼罗宾</td>-->
+                        <!--<td>6</td>-->
+                        <!--<td>0</td>-->
+                        <!--<td>-->
+                            <!--<a class="btn btn-default right" href="publishlist.html?forumId=403"-->
+                               <!--style="font-size: 10px; height:28px;">配图</a>-->
+                            <!--<a class="btn btn-default right" href="sendreward.html?forumId=403"-->
+                               <!--style="font-size: 10px; height:28px;">打赏</a>-->
+                            <!--<a class="btn btn-default right" href="delete.html?forumId=403"-->
+                               <!--style="font-size: 10px; height:28px;" onclick="return confirm('确认删除？')">删除</a>-->
+                            <!--<a class="btn btn-default right" href="edit.html?forumId=403"-->
+                               <!--style="font-size: 10px; height:28px;">编辑</a>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+
+                    <!--<tr>-->
+                        <!--<td align="center"></td>-->
+                        <!--<td>-->
+                            <!--<input type="checkbox"/></td>-->
+                        <!--<td>402</td>-->
+                        <!--<td>-->
+
+                            <!--<img src="http://www.zxrenjia.com/upload/forum/2018-5/ura_180519192958vxqsqb.JPG" width="50" height="50"-->
+                                 <!--style="margin: 10px; border-radius: 3px; border: 2px solid darkred ;float: left"/>-->
+
+                            <!--<p style="word-wrap:break-word;overflow: hidden;">招聘</p>-->
+                        <!--</td>-->
+                        <!--<td>【亚洲迈克泰森】中国的安东尼罗宾</td>-->
+                        <!--<td>5</td>-->
+                        <!--<td>0</td>-->
+                        <!--<td>-->
+                            <!--<a class="btn btn-default right" href="publishlist.html?forumId=402"-->
+                               <!--style="font-size: 10px; height:28px;">配图</a>-->
+                            <!--<a class="btn btn-default right" href="sendreward.html?forumId=402"-->
+                               <!--style="font-size: 10px; height:28px;">打赏</a>-->
+                            <!--<a class="btn btn-default right" href="delete.html?forumId=402"-->
+                               <!--style="font-size: 10px; height:28px;" onclick="return confirm('确认删除？')">删除</a>-->
+                            <!--<a class="btn btn-default right" href="edit.html?forumId=402"-->
+                               <!--style="font-size: 10px; height:28px;">编辑</a>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+
+                    </tbody>
+                </table>
+                <div class="clear clearfix"></div>
+                <div class="number">
+
+                    <ul id="dataPageList" class="pagination" th:utext="${Model.pageModel.toString()}">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+
+</html>

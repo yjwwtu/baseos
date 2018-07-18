@@ -1,0 +1,228 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>英卡电子</title>
+    <meta name="author" content="Cqingwo-Liu"/>
+    <meta name="copyright" content="Copyright (c) 2011 Cqingwo All Rights Reserved."/>
+    <!-- struts -->
+    <link href="/static/admin/css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/miluo.css"/>
+    <!-- 调用远程jquery -->
+    <script src="https://cdn.cqwo.com/js/jquery.min.js" type="text/javascript"></script>
+    <!-- 调用Bootstrap-->
+    <script src="https://cdn.cqwo.com/js/bootstrap.min.js" type="text/javascript"></script>
+    <!--公共JS方法-->
+    <script src="https://cdn.cqwo.com/js/commom.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/static/admin/scripts/showlist.js"></script>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.cqwo.com/js/html5shiv.min.js"></script>
+    <script src="https://cdn.cqwo.com/js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<div id="wrapper">
+    <div class="title">
+        <div class="position">
+            <img src="/static/admin/images/position.png" alt=""/>
+            <a href="#">圈子管理</a>
+            <img src="/static/admin/images/right.png" alt=""/>
+            <span>帖子详情</span>
+        </div>
+        <div th:replace="~{admin/shared/common_message :: hope}"></div>
+    </div>
+    <div id="contenr" style="height: auto">
+        <div class="addTable">
+            <!-- 图片预览div -->
+            <div id="fade" class="black_overlay"></div>
+            <table style="width: 99%" class="table table-striped table-bordered table-hover">
+                <tbody>
+                <tr>
+                    <th colspan="4" align="left">帖子基本信息</th>
+                </tr>
+                <tr>
+                    <td width="150px">帖子标题：</td>
+                    <td width="320px" th:text="${Model.forumInfo.title}"></td>
+                    <td width="150px">发帖人：</td>
+                    <td th:text="${Model.forumInfo.nickName}"></td>
+                </tr>
+                <tr>
+                    <td>帖子内容</td>
+                    <td colspan="3" th:text="${Model.forumInfo.body}"></td>
+                </tr>
+                <tr>
+                    <td>图片信息</td>
+                    <td><a th:href="${Model.forumInfo.litpic}" target="view_window">
+                        <img class="img-responsive" alt="加载失败" title="点击可查看原图" th:src="${Model.forumInfo.litpic+'?imageMogr2/thumbnail/!20p'}" width="50" height="50"
+                             style="margin: 10px; border-radius: 3px; border: 2px solid darkred ;float: left"/></a>
+                    </td>
+
+                    <td>视频信息</td>
+                    <span th:if ="${Model.forumInfo.mediaUrl == ''}"><td>没有视频信息</td></span>
+                    <span th:if ="${Model.forumInfo.mediaUrl != ''}">
+                    <td height="130">
+                        <video th:src="${Model.forumInfo.mediaUrl}" controls="controls" height="130" width="180" style="padding-top: 7px">
+                        </video>
+                    </td>
+                </span>
+                </tr>
+                <tr>
+                    <td>发帖时间：</td>
+                    <td th:text="${DateHelper.timeformat(Model.forumInfo.addTime)}"> </td>
+                    <td>发帖地址：</td>
+                    <td th:text="${Model.forumInfo.address}"></td>
+                </tr>
+                <tr>
+                    <td>地址经度：</td>
+                    <td th:text="${Model.forumInfo.longitude}"> </td>
+                    <td>地址纬度：</td>
+                    <td th:text="${Model.forumInfo.latitude}"></td>
+                </tr>
+                <tr>
+                    <td>帖子分类：</td>
+                    <td th:text="${Model.forumInfo.cateName}"> </td>
+                    <td>更新时间：</td>
+                    <td th:text="${DateHelper.timeformat(Model.forumInfo.updateTime)}"></td>
+                </tr>
+                <tr>
+                    <td>是否热帖：</td>
+                    <td th:text="${Model.forumInfo.isHot}"></td>
+                    <td>热帖过期时间：</td>
+                    <td th:text="${Model.forumInfo.hotExpireTime==0}?'未设置':${DateHelper.timeformat(Model.forumInfo.hotExpireTime)}"></td>
+                </tr>
+                <tr>
+                    <td>是否置顶：</td>
+                    <td th:text="${Model.forumInfo.isTop}"></td>
+                    <td>置顶过期时间：</td>
+                    <td th:text="${Model.forumInfo.topExpireTime==0}?'未设置':${DateHelper.timeformat(Model.forumInfo.topExpireTime)}"></td>
+                </tr>
+                <tr>
+                    <td>是否置新：</td>
+                    <td th:text="${Model.forumInfo.isNew}"></td>
+                    <td>是否显示：</td>
+                    <td th:text="${Model.forumInfo.isShow}"></td>
+                </tr>
+                <tr>
+                    <td>点击量：</td>
+                    <td th:text="${Model.forumInfo.click}"> </td>
+                    <td>点赞数：</td>
+                    <td th:text="${Model.forumInfo.praiseCount}"></td>
+                </tr>
+                <tr>
+                    <td>回帖数</td>
+                    <td th:text="${Model.forumInfo.postCount}"></td>
+                    <td>过期时间</td>
+                    <td th:text="${DateHelper.timeformat(Model.forumInfo.newExpireTime)}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <table style="width: 99%" class="table table-striped table-bordered table-hover">
+                <tbody>
+                <tr>
+                    <th colspan="4" align="left">发帖人信息</th>
+                </tr>
+                <tr>
+                    <td rowspan="2" width="150">头像</td>
+                    <td rowspan="2" width="320">
+                        <a th:href="${Model.userInfo.avatar}" target="view_window">
+                            <img class="img-responsive" alt="加载失败" title="单击可查看原图" th:src="${Model.userInfo.avatar}" width="50" height="50"
+                                 style="margin: 10px; border-radius: 3px; border: 2px solid darkred ;float: left"/></a>
+                    </td>
+                    <td width="150">用户编号：</td><td th:text="${Model.userInfo.uid}"></td>
+                </tr>
+                <tr>
+                    <td>用户名：</td><td th:text="${Model.userInfo.userName}"></td>
+                </tr>
+                <tr>
+                    <td>用户昵称：</td><td th:text="${Model.userInfo.nickName}"></td>
+                    <td>真实姓名：</td><td th:text="${Model.userInfo.realName}"></td>
+                </tr>
+                <tr>
+                    <td>电子邮箱：</td><td th:text="${Model.userInfo.email}"></td>
+                    <td>是否验证邮箱：</td><td th:text="${Model.userInfo.verifyEmail==0}?'未验证':'已验证'"></td>
+                </tr>
+                <tr>
+                    <td>手机号：</td><td th:text="${Model.userInfo.mobile}"></td>
+                    <td>是否验证手机：</td><td th:text="${Model.userInfo.verifyMobile==0}?'未验证':'已验证'"></td>
+                </tr>
+                <tr>
+                    <td>所在区域：</td><td th:text="${Model.userInfo.regionId}"></td>
+                    <td>地址信息：</td><td th:text="${Model.userInfo.address}"></td>
+                </tr>
+                <tr>
+                    <td>经度：</td><td th:text="${Model.userInfo.longitude}"></td>
+                    <td>纬度：</td><td th:text="${Model.userInfo.latitude}"></td>
+                </tr>
+                <tr>
+                    <td>可支付积分：</td><td th:text="${Model.userInfo.payCredits}"></td>
+                    <td>积分等级：</td><td th:text="${Model.userInfo.rankCredits}"></td>
+                </tr>
+                <tr>
+                    <td>用户余额：</td><td th:text="${Model.userInfo.money}"></td>
+                    <td>消费等级：</td><td th:text="${Model.userInfo.rankMoney}"></td>
+                </tr>
+                <tr>
+                    <td>邀请码：</td><td th:text="${Model.userInfo.invitCode}"></td>
+                    <td>推荐人：</td><td th:text="${Model.userInfo.parentId}"></td>
+                </tr>
+                <tr>
+                    <td>盐值：</td><td th:text="${Model.userInfo.salt}"></td>
+                    <td>解禁时间：</td><td th:text="${Model.userInfo.liftBanTime==0}?'未禁言':${DateHelper.timeformat(Model.userInfo.liftBanTime)}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <table style="width: 99%" class="table table-striped table-bordered table-hover">
+                <tbody>
+                <tr>
+                    <th colspan="4" align="left">跟帖信息</th>
+                </tr>
+                <tr style="text-align: center">
+                    <th>跟帖人</th>
+                    <th>跟帖标题</th>
+                    <th>跟帖信息</th>
+                    <th>跟帖时间</th>
+                    <th>更新时间</th>
+                </tr>
+                <tr th:each="postInfo : ${Model.forumPostInfoList}">
+                    <td th:text="${postInfo.nickName}"></td>
+                    <td th:text="${postInfo.title}"></td>
+                    <td th:text="${postInfo.body}"></td>
+                    <td th:text="${DateHelper.timeformat(postInfo.postTime)}"></td>
+                    <td th:text="${DateHelper.timeformat(postInfo.updateTime)}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <table style="width: 99%" class="table table-striped table-bordered table-hover">
+                <tbody>
+                <tr>
+                    <th colspan="4" align="left">附件信息</th>
+                </tr>
+                <tr style="text-align: center">
+                    <th>附件名称</th>
+                    <th>附件预览</th>
+                    <th>上传时间</th>
+                </tr>
+                <tr th:each="attachment : ${Model.attachmentInfoList}">
+                    <td th:text="${attachment.title}"></td>
+                    <td><a th:href="${attachment.url}" target="view_window">
+                        <img class="img-responsive" alt="加载失败" title="单击可查看原图" th:src="${attachment.url+'?imageMogr2/thumbnail/!20p'}" width="50" height="50"
+                             style="margin: 10px; border-radius: 3px; border: 2px solid darkred ;float: left"/></a>
+                    </td>
+                    <td th:text="${DateHelper.timeformat(attachment.createTime)}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <br>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

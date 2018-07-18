@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="common_header">
+    <style type="text/css">
+        .list-group-item {
+            position: relative;
+            display: block;
+            padding: 10px 55px;
+            margin-bottom: -1px;
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-top: none;
+        }
+    </style>
+    <nav class="navbar-inverse">
+        <div class="container-fluid">
+            <div class="logo"><img src="/static/admin/images/logo.png"/></div>
+            <div class="info2">
+                <h1>英卡电子</h1>
+                <div class="uers"><a href="/"><i class="icon iconfont icon-geren"></i>cqnews</a><a href="/"
+                                                                                                   class="news">消息<span>5</span></a>
+                </div>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/admin/index"><i class="icon iconfont icon-shouye"></i>首页</a></li>
+
+                    <li><a href="/admin/user/index"><i class="icon iconfont icon-yuangong"></i>用户</a></li>
+
+                    <li><a href="/admin/event/index"><i class="icon iconfont icon-gongzuotai"></i>报事</a></li>
+
+                    <li><a href="/admin/specie/index"><i class="icon iconfont icon-dayinji"></i>发现</a></li>
+
+                    <li><a href="/admin/forum/index"><i class="icon iconfont icon-dayinji"></i>圈子</a></li>
+
+                    <li><a href="/admin/bank/index"><i class="icon iconfont icon-xitongpeizhi"></i>财务</a></li>
+
+
+                    <li><a href="/logout"><i class="icon iconfont icon-tuichu"></i>退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

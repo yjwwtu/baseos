@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Core" />
+        <module name="Data" />
+        <module name="OAuth.MiniApp" />
+        <module name="Pay.Wechat" />
+        <module name="Services" />
+        <module name="Strategy.Bank" />
+        <module name="Strategy.Config" />
+        <module name="Strategy.Email" />
+        <module name="Strategy.Event" />
+        <module name="Strategy.Log" />
+        <module name="Strategy.Push" />
+        <module name="Strategy.RDBS" />
+        <module name="Strategy.Redis" />
+        <module name="Strategy.SMS" />
+        <module name="Strategy.Upload" />
+        <module name="Web" />
+        <module name="Web.Admin" />
+        <module name="Web.Api" />
+        <module name="Web.Framework" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Core" target="1.8" />
+      <module name="Data" target="1.8" />
+      <module name="OAuth.MiniApp" target="1.8" />
+      <module name="Pay.Wechat" target="1.8" />
+      <module name="Services" target="1.8" />
+      <module name="SoftGateWay" target="1.8" />
+      <module name="Strategy.Bank" target="1.8" />
+      <module name="Strategy.Config" target="1.8" />
+      <module name="Strategy.Email" target="1.8" />
+      <module name="Strategy.Event" target="1.8" />
+      <module name="Strategy.Linkos" target="1.8" />
+      <module name="Strategy.Log" target="1.8" />
+      <module name="Strategy.Push" target="1.8" />
+      <module name="Strategy.RDBS" target="1.8" />
+      <module name="Strategy.Redis" target="1.8" />
+      <module name="Strategy.SMS" target="1.8" />
+      <module name="Strategy.Upload" target="1.8" />
+      <module name="Web" target="1.8" />
+      <module name="Web.Admin" target="1.8" />
+      <module name="Web.Api" target="1.8" />
+      <module name="Web.Framework" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
