@@ -19,6 +19,9 @@ import com.cqwo.xxx.core.domain.users.UserRankInfo;
 
 import java.util.List;
 
+/**
+ * @author cqnews
+ */
 public class WeApiWorkContext extends BaseWorkContext {
 
 

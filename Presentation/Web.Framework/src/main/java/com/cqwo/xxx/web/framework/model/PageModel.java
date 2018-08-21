@@ -274,7 +274,7 @@ public class PageModel extends Pager {
     /// 获得开始页数
     /// </summary>
     /// <returns></returns>
-    protected int getStartPageNumber() {
+    private int getStartPageNumber() {
         int mid=itemCount / 2;
         if ((this.totalPages < itemCount) || ((this.pageNumber - mid) < 1)) {
             return 1;
@@ -285,11 +285,11 @@ public class PageModel extends Pager {
         return this.pageNumber - mid;
     }
 
-    /// <summary>
-    /// 获得结束页数
-    /// </summary>
-    /// <returns></returns>
-    protected int getEndPageNumber() {
+    /**
+     * 获得结束页数
+     * @return
+     */
+    private int getEndPageNumber() {
         int mid=itemCount / 2;
         if ((itemCount % 2) == 0) {
             mid--;

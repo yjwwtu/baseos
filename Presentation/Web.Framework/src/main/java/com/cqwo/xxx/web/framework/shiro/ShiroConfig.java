@@ -25,6 +25,9 @@ import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * @author cqnews
+ */
 @Configuration
 public class ShiroConfig {
 

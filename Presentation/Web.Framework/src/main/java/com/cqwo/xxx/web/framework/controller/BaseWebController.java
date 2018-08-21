@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author cqnews
+ */
 @Controller
 public class BaseWebController extends BaseController {
 

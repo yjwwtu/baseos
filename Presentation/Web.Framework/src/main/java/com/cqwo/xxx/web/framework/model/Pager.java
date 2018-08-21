@@ -10,7 +10,9 @@
 package com.cqwo.xxx.web.framework.model;
 
 /**
- * Created by cqnews on 2017/12/14.
+ *
+ * @author cqnews
+ * @date 2017/12/14
  */
 public class Pager {
 

@@ -10,9 +10,6 @@
 package com.cqwo.xxx.web.framework;
 
 import com.cqwo.xxx.core.helper.WebHelper;
-import com.cqwo.xxx.core.helper.WebHelper;
-import com.cqwo.xxx.core.helper.WebHelper;
-
 
 
 public class PromptModel {
@@ -65,7 +62,7 @@ public class PromptModel {
      */
     public PromptModel(String message, String backUrl) {
         this.backUrl = backUrl;
-        System.out.println("backUrl:" + WebHelper.UrlDecode(this.backUrl));
+        System.out.println("backUrl:" + WebHelper.urlDecode(this.backUrl));
         this.message = message;
     }
 

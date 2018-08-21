@@ -123,7 +123,7 @@ public class CWMUtils {
     /// </summary>
     /// <returns></returns>
     public String GetCookiePassword() {
-        return WebHelper.UrlDecode(GetCWMCookie("password"));
+        return WebHelper.urlDecode(GetCWMCookie("password"));
     }
 
     /// <summary>
@@ -134,7 +134,7 @@ public class CWMUtils {
     public String DecryptCookiePassword(String cookiePassword) {
         try {
 
-            //cookiePassword=WebHelper.UrlDecode(cookiePassword);
+            //cookiePassword=WebHelper.urlDecode(cookiePassword);
 
             return aesDecrypt(cookiePassword).trim();
         } catch (Exception e) {
@@ -147,7 +147,7 @@ public class CWMUtils {
     /// </summary>
     public void setCookiePassword(HttpServletResponse response, String password) {
         try {
-            SetCWMCookie(response, "password", WebHelper.UrlEncode(aesEncrypt(password)));
+            SetCWMCookie(response, "password", WebHelper.urlEncode(aesEncrypt(password)));
         } catch (Exception e) {
 
         }
@@ -180,7 +180,7 @@ public class CWMUtils {
 
         String json = JsonHelper.object2Json(partUserInfo).toString();
 
-        SetCWMCookie(response, "userinfo", WebHelper.UrlEncode(json), expires);
+        SetCWMCookie(response, "userinfo", WebHelper.urlEncode(json), expires);
         setUidCookie(response, partUserInfo.getUid());
         try {
             setCookiePassword(response, partUserInfo.getPassword());
@@ -192,7 +192,7 @@ public class CWMUtils {
 //            cookie=new HttpCookie("cwm");
 //
 //        cookie.Values["uid"]=partUserInfo.getUid().toString();
-//        cookie.Values["password"]=WebHelper.UrlEncode(aesEncrypt(partUserInfo.Password));
+//        cookie.Values["password"]=WebHelper.urlEncode(aesEncrypt(partUserInfo.Password));
 //        if (expires > 0) {
 //            cookie.Values["expires"]=expires.ToString();
 //            cookie.Expires=DateTime.Now.AddDays(expires);
@@ -259,7 +259,7 @@ public class CWMUtils {
         String referer = "/";
         try {
 
-            referer = WebHelper.UrlDecode(WebHelper.getCookieValue(request, "referer"));
+            referer = WebHelper.urlDecode(WebHelper.getCookieValue(request, "referer"));
             if (referer.length() <= 0) {
                 referer = "/";
             }
@@ -273,13 +273,13 @@ public class CWMUtils {
     /// 设置访问referer
     /// </summary>
     public void SetRefererCookie(HttpServletResponse response, String url) {
-        WebHelper.setCookie(response, "referer", WebHelper.UrlEncode(url));
+        WebHelper.setCookie(response, "referer", WebHelper.urlEncode(url));
     }
 
     /// <summary>
     /// </summary>
     public String GetAdminRefererCookie() {
-        return WebHelper.UrlDecode(GetAdminRefererCookie("/admin/runinfo.html"));
+        return WebHelper.urlDecode(GetAdminRefererCookie("/admin/runinfo.html"));
     }
 
 
@@ -292,7 +292,7 @@ public class CWMUtils {
     public String GetAdminRefererCookie(String defaultUrl) {
         String adminReferer = defaultUrl;
         try {
-            adminReferer = WebHelper.UrlDecode(WebHelper.getCookieValue(request, "adminreferer"));
+            adminReferer = WebHelper.urlDecode(WebHelper.getCookieValue(request, "adminreferer"));
             if (adminReferer.length() == 0) {
                 adminReferer = defaultUrl;
             }
@@ -306,7 +306,7 @@ public class CWMUtils {
     /// 获得店铺后台访问referer
     /// </summary>
     public String GetStoreAdminRefererCookie() {
-        return WebHelper.UrlDecode(GetStoreAdminRefererCookie("/storeadmin/runinfo.html"));
+        return WebHelper.urlDecode(GetStoreAdminRefererCookie("/storeadmin/runinfo.html"));
     }
 
     /**
@@ -318,7 +318,7 @@ public class CWMUtils {
     public String GetStoreAdminRefererCookie(String defaultUrl) {
         String adminReferer = defaultUrl;
         try {
-            adminReferer = WebHelper.UrlDecode(WebHelper.getCookieValue(request, "storereferer"));
+            adminReferer = WebHelper.urlDecode(WebHelper.getCookieValue(request, "storereferer"));
             if (adminReferer.length() == 0) {
                 adminReferer = defaultUrl;
             }
@@ -335,7 +335,7 @@ public class CWMUtils {
     public String GetMobileRefererCookie() {
 
 
-        return WebHelper.UrlDecode(GetMobileRefererCookie("/mob/"));
+        return WebHelper.urlDecode(GetMobileRefererCookie("/mob/"));
     }
 
     /**
@@ -346,7 +346,7 @@ public class CWMUtils {
      */
     public String GetMobileRefererCookie(String defaultUrl) {
 
-        String adminReferer = WebHelper.UrlDecode(WebHelper.getCookieValue(request, "mobilereferer"));
+        String adminReferer = WebHelper.urlDecode(WebHelper.getCookieValue(request, "mobilereferer"));
         if (adminReferer.length() == 0) {
             adminReferer = defaultUrl;
         }
@@ -360,7 +360,7 @@ public class CWMUtils {
      * @param url url地址
      */
     public void SetAdminRefererCookie(HttpServletResponse response, String url) {
-        WebHelper.setCookie(response, "adminreferer", WebHelper.UrlEncode(url));
+        WebHelper.setCookie(response, "adminreferer", WebHelper.urlEncode(url));
     }
 
     /**

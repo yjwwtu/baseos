@@ -19,7 +19,9 @@ import com.cqwo.xxx.core.domain.users.UserRankInfo;
 import java.util.List;
 
 /**
- * Created by cqnews on 2017/4/14.
+ *
+ * @author cqnews
+ * @date 2017/4/14
  */
 public class ApiWorkContext extends BaseWorkContext {
 

@@ -24,25 +24,33 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by cqnews on 2017/12/7.
+ *
+ * @author cqnews
+ * @date 2017/12/7
  */
 public class WebHelper {
 
 
-    //浏览器列表
-    private static String[] _browserlist = new String[]{"ie", "chrome", "mozilla", "netscape", "firefox", "opera", "konqueror"};
+    /**
+     * 浏览器列表
+     */
+    private static String[] browserlist = new String[]{"ie", "chrome", "mozilla", "netscape", "firefox", "opera", "konqueror"};
 
 
-    //region Http封装
+    /**
+     * region Http封装
+     */
     public WebHelper() {
 
     }
 
 
-    // \b 是单词边界(连着的两个(字母字符 与 非字母字符) 之间的逻辑上的间隔),
-    // 字符串在编译时会被转码一次,所以是 "\\b"
-    // \B 是单词内部逻辑间隔(连着的两个字母字符之间的逻辑上的间隔)
-    static String _phoneReg = "\\b(ip(hone|od)|android|opera m(ob|in)i"
+    /**
+     * \b 是单词边界(连着的两个(字母字符 与 非字母字符) 之间的逻辑上的间隔),
+     * 字符串在编译时会被转码一次,所以是 "\\b"
+     * \B 是单词内部逻辑间隔(连着的两个字母字符之间的逻辑上的间隔)
+     */
+    static String phoneReg = "\\b(ip(hone|od)|android|opera m(ob|in)i"
             + "|windows (phone|ce)|blackberry"
             + "|s(ymbian|eries60|amsung)|p(laybook|alm|rofile/midp"
             + "|laystation portable)|nokia|fennec|htc[-_]"
@@ -51,13 +59,13 @@ public class WebHelper {
             + "|[1-4][0-9]{2}x[1-4][0-9]{2})\\b";
 
 
-    private static Pattern _detectphoneregex = Pattern.compile(_phoneReg, Pattern.CASE_INSENSITIVE);
+    private static Pattern detectphoneregex = Pattern.compile(phoneReg, Pattern.CASE_INSENSITIVE);
 
-    private static Pattern _detecttableregex = Pattern.compile(_phoneReg, Pattern.CASE_INSENSITIVE);
+    private static Pattern detecttableregex = Pattern.compile(phoneReg, Pattern.CASE_INSENSITIVE);
 
-    private static Pattern _detectiphoneregex = Pattern.compile("iphone|Mac", Pattern.CASE_INSENSITIVE);
+    private static Pattern detectiphoneregex = Pattern.compile("iphone|Mac", Pattern.CASE_INSENSITIVE);
 
-    private static Pattern _detectwechatregex = Pattern.compile("MicroMessenger|micromessenger", Pattern.CASE_INSENSITIVE);
+    private static Pattern detectwechatregex = Pattern.compile("MicroMessenger|micromessenger", Pattern.CASE_INSENSITIVE);
 
     //region 编码
 
@@ -67,23 +75,27 @@ public class WebHelper {
      * @param s 编码串
      * @return
      */
-    public static String HtmlDecode(String s) {
+    public static String htmlDecode(String s) {
         return StringEscapeUtils.escapeHtml4(s);
     }
 
-    /// <summary>
-    /// HTML编码
-    /// </summary>
-    /// <returns></returns>
-    public static String HtmlEncode(String s) {
+    /**
+     * HTML编码
+     *
+     * @param s
+     * @return
+     */
+    public static String htmlEncode(String s) {
         return StringEscapeUtils.unescapeHtml4(s);
     }
 
-    /// <summary>
-    /// URL解码
-    /// </summary>
-    /// <returns></returns>
-    public static String UrlDecode(String s) {
+    /**
+     * URL解码
+     *
+     * @param s s
+     * @return String
+     */
+    public static String urlDecode(String s) {
         try {
             return URLDecoder.decode(s, "UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -91,11 +103,14 @@ public class WebHelper {
         }
     }
 
-    /// <summary>
-    /// URL编码
-    /// </summary>
-    /// <returns></returns>
-    public static String UrlEncode(String s) {
+
+    /**
+     * URL编码
+     *
+     * @param s s
+     * @return String
+     */
+    public static String urlEncode(String s) {
         try {
             return URLEncoder.encode(s, "UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -325,7 +340,7 @@ public class WebHelper {
      */
     public static String GetBrowserType(HttpServletRequest request) {
         String type = request.getHeader("User-Agent");
-        if (type == null || type == "unknown" || type == "") {
+        if (type == null || "unknown".equals(type) || "".equals(type)) {
             return "未知";
         }
         return type.toLowerCase();
@@ -335,7 +350,7 @@ public class WebHelper {
     /**
      * 检测是否手机访问
      *
-     * @param request
+     * @param request request
      * @return
      */
     public static boolean IsMobile(HttpServletRequest request) {
@@ -347,8 +362,8 @@ public class WebHelper {
         }
 
 
-        Matcher matcherPhone = _detectiphoneregex.matcher(userAgent);
-        Matcher matcherTable = _detecttableregex.matcher(userAgent);
+        Matcher matcherPhone = detectiphoneregex.matcher(userAgent);
+        Matcher matcherTable = detecttableregex.matcher(userAgent);
 
         if (matcherPhone.find() || matcherTable.find()) {
             return true;
@@ -361,7 +376,7 @@ public class WebHelper {
     /**
      * 检测是否手机微信访问
      *
-     * @param request
+     * @param request request
      * @return
      */
     public static boolean IsWechat(HttpServletRequest request) {
@@ -373,7 +388,7 @@ public class WebHelper {
         }
 
 
-        Matcher matcherWechat = _detectwechatregex.matcher(userAgent);
+        Matcher matcherWechat = detectwechatregex.matcher(userAgent);
 
         if (matcherWechat.find()) {
             return true;
@@ -387,7 +402,7 @@ public class WebHelper {
     @Test
     public void Test() {
         String userAgent = "Mozilla/5.0 (Linux; U; Android 7.1.1; zh-CN; Nexus 6 Build/N6F27E) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/4.0 Chrome/40.0.2214.89 UCBrowser/11.8.1.1043 Mobile Safari/537.36 AliApp(TUnionSDK/0.1.20)";
-        Matcher matcherWechat = _detectphoneregex.matcher(userAgent);
+        Matcher matcherWechat = detectphoneregex.matcher(userAgent);
 
         if (matcherWechat.find()) {
             System.out.println("是手机访问");
@@ -420,12 +435,14 @@ public class WebHelper {
     //region 封装取值
 
 
-    /// <summary>
-    /// 获得查询字符串中的值
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <param name="defaultValue">默认值</param>
-    /// <returns></returns>
+    /**
+     * 获得查询字符串中的值
+     *
+     * @param request      request
+     * @param key          键
+     * @param defaultValue 默认值
+     * @return String
+     */
     public static String getQueryString(HttpServletRequest request, String key, String defaultValue) {
         String s = defaultValue;
         try {
@@ -441,40 +458,49 @@ public class WebHelper {
         return s;
     }
 
-    /// <summary>
-    /// 获得查询字符串中的值
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <returns></returns>
+    /**
+     * 获得查询字符串中的值
+     *
+     * @param request request
+     * @param key     键
+     * @return String
+     */
     public static String getQueryString(HttpServletRequest request, String key) {
         return getQueryString(request, key, "");
     }
 
-    /// <summary>
-    /// 获得查询字符串中的值
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <param name="defaultValue">默认值</param>
-    /// <returns></returns>
+    /**
+     * 获得查询字符串中的值
+     *
+     * @param request      request
+     * @param key          键
+     * @param defaultValue 默认值
+     * @return Integer
+     */
     public static Integer getQueryInt(HttpServletRequest request, String key, Integer defaultValue) {
         return TypeHelper.StringToInt(request.getParameter(key), defaultValue);
     }
 
-    /// <summary>
-    /// 获得查询字符串中的值
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <returns></returns>
+    /**
+     * 获得查询字符串中的值
+     *
+     * @param request request
+     * @param key     键
+     * @return Integer
+     */
     public static Integer getQueryInt(HttpServletRequest request, String key) {
         return getQueryInt(request, key, 0);
     }
 
-    /// <summary>
-    /// 获得表单中的值
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <param name="defaultValue">默认值</param>
-    /// <returns></returns>
+
+    /**
+     * 获得表单中的值
+     *
+     * @param request      request
+     * @param key          键
+     * @param defaultValue 默认值
+     * @return String
+     */
     public static String getFormString(HttpServletRequest request, String key, String defaultValue) {
         String value = request.getParameter(key);
         if (!StringHelper.IsNullOrWhiteSpace(value)) {
@@ -484,40 +510,49 @@ public class WebHelper {
         }
     }
 
-    /// <summary>
-    /// 获得表单中的值
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <returns></returns>
+
+    /**
+     * 获得表单中的值
+     *
+     * @param request request
+     * @param key     键
+     * @return String
+     */
     public static String getFormString(HttpServletRequest request, String key) {
         return getFormString(request, key, "");
     }
 
-    /// <summary>
-    /// 获得表单中的值
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <param name="defaultValue">默认值</param>
-    /// <returns></returns>
+    /**
+     * 获得表单中的值
+     *
+     * @param request      request
+     * @param key          键
+     * @param defaultValue 默认值
+     * @return Integer
+     */
     public static Integer getFormInt(HttpServletRequest request, String key, Integer defaultValue) {
         return TypeHelper.StringToInt(request.getParameter(key), defaultValue);
     }
 
-    /// <summary>
-    /// 获得表单中的值
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <returns></returns>
+    /**
+     * 获得表单中的值
+     *
+     * @param request request
+     * @param key     键
+     * @return Integer
+     */
     public static Integer getFormInt(HttpServletRequest request, String key) {
         return getFormInt(request, key, 0);
     }
 
-    /// <summary>
-    /// 获得请求中的值
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <param name="defaultValue">默认值</param>
-    /// <returns></returns>
+    /**
+     * 获得请求中的值
+     *
+     * @param request      request
+     * @param key          键
+     * @param defaultValue 默认值
+     * @return String
+     */
     public static String getRequestString(HttpServletRequest request, String key, String defaultValue) {
 
         String s = (String) request.getAttribute(key);
@@ -528,21 +563,26 @@ public class WebHelper {
         }
     }
 
-    /// <summary>
-    /// 获得请求中的值
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <returns></returns>
+    /**
+     * 获得请求中的值
+     *
+     * @param request request
+     * @param key     键
+     * @return String
+     */
     public static String getRequestString(HttpServletRequest request, String key) {
         return getRequestString(request, key, "");
     }
 
-    /// <summary>
-    /// 获得请求中的值
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <param name="defaultValue">默认值</param>
-    /// <returns></returns>
+
+    /**
+     * 获得请求中的值
+     *
+     * @param request      request      request
+     * @param key          键
+     * @param defaultValue 默认值
+     * @return Integer
+     */
     public static Integer getRequestInt(HttpServletRequest request, String key, Integer defaultValue) {
 
         Integer i = defaultValue;
@@ -555,70 +595,83 @@ public class WebHelper {
         return i;
     }
 
-    /// <summary>
-    /// 获得请求中的值
-    /// </summary>
-    /// <param name="key">键</param>
-    /// <returns></returns>
+    /**
+     * 获得请求中的值
+     *
+     * @param request request
+     * @param key     键
+     * @return Integer
+     */
     public static Integer getRequestInt(HttpServletRequest request, String key) {
 
         return getRequestInt(request, key, 0);
     }
 
 
-    /// <summary>
-    /// 获得请求的url
-    /// </summary>
-    /// <returns></returns>
+    /**
+     * 获得请求的url
+     *
+     * @param request request
+     * @return
+     */
     public static String getUrl(HttpServletRequest request) {
         return request.getRequestURI();
     }
 
 
-    /// <summary>
-    /// 获得请求的浏览器类型
-    /// </summary>
-    /// <returns></returns>
+    /**
+     * 获得请求的浏览器类型
+     *
+     * @param request request
+     * @return
+     */
     public static String getBrowserType(HttpServletRequest request) {
         String type = request.getAuthType();
-        if (StringHelper.IsNullOrWhiteSpace(type) || type == "unknown") {
+        if (StringHelper.IsNullOrWhiteSpace(type) || "unknown".equals(type)) {
             return "未知";
         }
 
         return type.toLowerCase();
     }
 
-    /// <summary>
-    /// 获得请求的浏览器名称
-    /// </summary>
-    /// <returns></returns>
+    /**
+     * 获得请求的浏览器名称
+     *
+     * @param request request
+     * @return
+     */
     public static String getBrowserName(HttpServletRequest request) {
         String name = request.getHeader("User-Agent");
-        if (StringHelper.IsNullOrEmpty(name) || name == "unknown") {
+        if (StringHelper.IsNullOrEmpty(name) || "unknown".equals(name)) {
             return "未知";
         }
 
         return name.toLowerCase();
     }
 
-    /// <summary>
-    /// 获得请求的浏览器版本
-    /// </summary>
-    /// <returns></returns>
-    public static String GetBrowserVersion(HttpServletRequest request) {
+
+    /**
+     * 获得请求的浏览器版本
+     *
+     * @param request request
+     * @return
+     */
+    public static String getBrowserVersion(HttpServletRequest request) {
         String version = request.getHeader("User-Agent");
-        if (StringHelper.IsNullOrEmpty(version) || version == "unknown") {
+        if (StringHelper.IsNullOrEmpty(version) || "unknown".equals(version)) {
             return "未知";
         }
 
         return version;
     }
 
-    /// <summary>
-    /// 获得请求客户端的操作系统类型
-    /// </summary>
-    /// <returns></returns>
-    public static String GetOSType(HttpServletRequest request) {
+    /**
+     * 获得请求客户端的操作系统类型
+     *
+     * @param request request
+     * @return
+     */
+    public static String getOSType(HttpServletRequest request) {
         String userAgent = request.getHeader("User-Agent");
         if (userAgent == null) {
             return "未知";
@@ -665,13 +718,15 @@ public class WebHelper {
     }
 
 
-    /// <summary>
-    /// 判断是否是浏览器请求
-    /// </summary>
-    /// <returns></returns>
+    /**
+     * 判断是否是浏览器请求
+     *
+     * @param request request
+     * @return
+     */
     public static boolean isBrowser(HttpServletRequest request) {
         String name = getBrowserName(request);
-        for (String item : _browserlist) {
+        for (String item : browserlist) {
             if (name.contains(item)) {
                 return true;
             }
@@ -679,10 +734,12 @@ public class WebHelper {
         return false;
     }
 
-    /// <summary>
-    /// 获取数据验证头
-    /// </summary>
-    /// <returns></returns>
+    /**
+     * 获取数据验证头
+     *
+     * @param request request
+     * @return String
+     */
     public static String getApiTokenHeader(HttpServletRequest request) {
         try {
             return request.getHeader("X-CWMAPI-Token");
@@ -692,10 +749,12 @@ public class WebHelper {
         }
     }
 
-    /// <summary>
-    /// 获取数据验证头
-    /// </summary>
-    /// <returns></returns>
+    /**
+     * 获取数据验证头
+     *
+     * @param request request
+     * @return String
+     */
     public static String getApiOpenIdHeader(HttpServletRequest request) {
         try {
             return request.getHeader("X-CWMAPI-OpenId");
@@ -706,7 +765,7 @@ public class WebHelper {
 
     /***
      * 获取openid
-     * @param request
+     * @param request request
      * @return
      */
     public static String getApiOpenIdHeader(ServletRequest request) {
@@ -717,10 +776,12 @@ public class WebHelper {
         }
     }
 
-    /// <summary>
-    /// 获取APIKEY验证头
-    /// </summary>
-    /// <returns></returns>
+
+    /**
+     * 获取APIKEY验证头
+     * @param request request
+     * @return String
+     */
     public static String getApiKeyHeader(HttpServletRequest request) {
         try {
             return request.getHeader("X-CWMAPI-ApiKey");
@@ -730,10 +791,11 @@ public class WebHelper {
         }
     }
 
-    /// <summary>
-    /// 获取数据验证头
-    /// </summary>
-    /// <returns></returns>
+    /**
+     * 获取数据验证头
+     * @param request request
+     * @return String
+     */
     public static String getApiSecretHeader(HttpServletRequest request) {
         try {
             return request.getHeader("X-CWMAPI-ApiSecret");
@@ -743,11 +805,11 @@ public class WebHelper {
         }
     }
 
-
-    /// <summary>
-    /// 获取数据OPENID头
-    /// </summary>
-    /// <returns></returns>
+    /**
+     * 获取数据OPENID头
+     * @param request request
+     * @return String
+     */
     public static String getOpenIdHeader(HttpServletRequest request) {
         try {
             return request.getHeader("X-CWMAPI-OpenId");
@@ -757,10 +819,11 @@ public class WebHelper {
         }
     }
 
-    /// <summary>
-    /// 获取SessionId
-    /// </summary>
-    /// <returns></returns>
+    /**
+     * 获取SessionId
+     * @param request request
+     * @return String
+     */
     public static String getSessionIdHeader(HttpServletRequest request) {
         try {
             return request.getHeader("X-CWMAPI-SessionId");
@@ -826,6 +889,12 @@ public class WebHelper {
     }
 
     //ip = 3232235778
+
+    /**
+     * int转ip
+     * @param ip ip
+     * @return ip
+     */
     public static String intToIp(Integer ip) {
         StringBuilder result = new StringBuilder(15);
 
@@ -843,6 +912,12 @@ public class WebHelper {
     }
 
     //ip = 3232235778
+
+    /**
+     * longtoip
+     * @param ip ip
+     * @return
+     */
     public String longToIp2(Integer ip) {
 
         return ((ip >> 24) & 0xFF) + "."
@@ -852,7 +927,7 @@ public class WebHelper {
     }
 
     @Test
-    public void Test2() {
+    public void test2() {
 
 
         String s = "https://http://www.cq187.cn//wechat/notify.html";

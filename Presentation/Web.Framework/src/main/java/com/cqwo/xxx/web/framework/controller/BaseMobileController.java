@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author cqnews
+ */
 @Controller
 @RequestMapping(value = "mob")
 public class BaseMobileController extends BaseController {
