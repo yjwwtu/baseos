@@ -28,6 +28,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="baseos" target="1.8" />
       <module name="Core" target="1.8" />
       <module name="Data" target="1.8" />
       <module name="OAuth.MiniApp" target="1.8" />

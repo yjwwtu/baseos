@@ -4,8 +4,8 @@
 
 
     <parent>
-        <artifactId>SoftGateWay</artifactId>
-        <groupId>com.link510.softgateway</groupId>
+        <artifactId>BaseOS</artifactId>
+        <groupId>com.cqwo.xxx</groupId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
@@ -84,106 +84,106 @@
         </dependency>
 
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Services</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
 
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Strategy.Config</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Strategy.SMS</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Strategy.Log</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Strategy.Email</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Strategy.Redis</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Strategy.Push</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Strategy.RDBS</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Strategy.Bank</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Strategy.Upload</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
 
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Web.Framework</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Web.Admin</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Web.Api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
 
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>OAuth.MiniApp</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Strategy.Event</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
 
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Pay.Wechat</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
@@ -197,7 +197,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.link510.softgateway.web.WebApplication</mainClass>
+                    <mainClass>com.cqwo.xxx.web.WebApplication</mainClass>
                     <fork>true</fork>
                     <!--<executable>true</executable>-->
                 </configuration>

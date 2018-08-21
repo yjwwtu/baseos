@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>SoftGateWay</artifactId>
-        <groupId>com.link510.softgateway</groupId>
+        <artifactId>BaseOS</artifactId>
+        <groupId>com.cqwo.xxx</groupId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
@@ -14,19 +14,19 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Core</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Services</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.link510.softgateway</groupId>
+            <groupId>com.cqwo.xxx</groupId>
             <artifactId>Web.Framework</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>provided</scope>
